@@ -17,7 +17,20 @@ function splitNested(str) {
 /* eslint prefer-rest-params: 0 */
 
 
+function contains(list, value) {
+  if (_underscore2.default.includes) {
+    return _underscore2.default.includes(list, value);
+  }
+
+  return list.indexOf(value) > -1;
+}
+
 function get(target, field) {
+  var directGet = target[field];
+  if (directGet !== undefined && directGet !== null) {
+    return directGet;
+  }
+
   var pathArray = splitNested(field);
   var result = void 0;
   try {
@@ -98,4 +111,12 @@ function debounce(func, wait, immediate) {
   };
 }
 
-exports.default = Object.assign(_underscore2.default, { get: get, set: set, isDefined: isDefined, isEmptyObject: isEmptyObject, sleep: sleep, debounce: debounce });
+exports.default = Object.assign(_underscore2.default, {
+  get: get,
+  set: set,
+  isDefined: isDefined,
+  isEmptyObject: isEmptyObject,
+  sleep: sleep,
+  debounce: debounce,
+  contains: contains
+});

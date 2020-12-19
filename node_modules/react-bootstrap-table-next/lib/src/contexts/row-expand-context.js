@@ -130,13 +130,20 @@ var RowExpandProvider = function (_React$Component) {
       var _this2 = this;
 
       if (nextProps.expandRow) {
-        var nextExpanded = nextProps.expandRow.expanded || this.state.expanded;
+        var nextExpanded = [].concat(_toConsumableArray(nextProps.expandRow.expanded || this.state.expanded));
+        var _nextProps$expandRow$ = nextProps.expandRow.nonExpandable,
+            nonExpandable = _nextProps$expandRow$ === undefined ? [] : _nextProps$expandRow$;
+
+        nextExpanded = nextExpanded.filter(function (rowId) {
+          return !_utils2.default.contains(nonExpandable, rowId);
+        });
         var isClosing = this.state.expanded.reduce(function (acc, cur) {
           if (!_utils2.default.contains(nextExpanded, cur)) {
             acc.push(cur);
           }
           return acc;
         }, []);
+
         this.setState(function () {
           return {
             expanded: nextExpanded,

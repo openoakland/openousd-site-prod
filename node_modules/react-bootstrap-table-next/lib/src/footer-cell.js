@@ -92,7 +92,7 @@ var FooterCell = function (_eventDelegater) {
       if (cellClasses) cellAttrs.className = (0, _classnames2.default)(cellAttrs.className, cellClasses);
       if (!_utils2.default.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
-      var children = footerFormatter ? footerFormatter(column, index) : text;
+      var children = footerFormatter ? footerFormatter(column, index, { text: text }) : text;
 
       return _react2.default.createElement('th', cellAttrs, children);
     }
